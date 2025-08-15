@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import schoolLogo from "../assets/logo_shool.jpg"; 
+import schoolLogo from "../assets/logo_shool.jpg";
 import Banner from "./Banner";
 
 export default function Home() {
@@ -12,16 +12,16 @@ export default function Home() {
           <h1 className="text-2xl sm:text-3xl font-extrabold text-blue-900">
             Hội Thi Olympic 2025
           </h1>
-<p className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-wide italic">
-  Các môn khoa học Mác - Lênin, tư tưởng Hồ Chí Minh & Nhận thức chính trị – xã hội
-</p>
+          <p className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-wide italic">
+            Các môn khoa học Mác - Lênin, tư tưởng Hồ Chí Minh & Nhận thức chính trị – xã hội
+          </p>
         </div>
       </header>
 
       {/* Banner */}
-<div className="w-full">
-  <Banner />
-</div>
+      <div className="w-full">
+        <Banner />
+      </div>
 
       {/* Main Section */}
       <main className="flex flex-col items-center justify-center flex-grow py-12 bg-gradient-to-b from-[#f0f4ff] to-[#fff]">
@@ -43,6 +43,12 @@ export default function Home() {
           <Link to="/crossword">
             <button className="w-60 sm:w-72 h-24 sm:h-28 bg-red-400 hover:bg-red-500 text-2xl sm:text-3xl font-bold rounded-xl shadow-xl transition">
               Giải ô chữ
+            </button>
+          </Link>
+
+          <Link to="/minigame">
+            <button className="w-60 sm:w-72 h-24 sm:h-28 bg-green-400 hover:bg-red-500 text-2xl sm:text-3xl font-bold rounded-xl shadow-xl transition">
+              MiniGame
             </button>
           </Link>
         </div>

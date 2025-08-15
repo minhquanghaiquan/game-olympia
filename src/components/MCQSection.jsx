@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import mcqQuestions from "../data/mcqQuestions";
 import bellMp3 from "../assets/het_gio.m4a";
 import countingMp3 from "../assets/counting.mp3";
-import bannerImage from '../assets/hinhnen2.jpg';
+import bannerImage from '../assets/hinhnen7.jpg';
 
 const optionLabels = ["A", "B", "C", "D", "E", "F"];
 
@@ -77,16 +77,21 @@ export default function MCQSection() {
   };
 
   return (
-    <div className="my-8 p-4 bg-white rounded-2xl shadow-xl max-w-[1400px] mx-auto">
+    <div className="my-8 p-4  rounded-2xl shadow-xl max-w-[1400px] mx-auto">
        <div
               className="absolute inset-0 bg-cover bg-center bg-blur-sm"
               style={{
-                backgroundImage: `url(${bannerImage})`, // Replace with your image URL
-                filter: "blur(2px)", // Apply a subtle blur to the image
-                zIndex: -1, // Ensure the background stays behind other content
+          backgroundImage: `url(${bannerImage})`, // Replace with your image URL
+          filter: "blur(2px)", // Apply a subtle blur to the image
+          zIndex: -1, // Ensure the background stays behind other content
+          position: "fixed", // Make the background fixed and cover the entire screen
+          top: 0, // Position it at the top of the screen
+          left: 0, // Position it at the left of the screen
+          width: "100vw", // Ensure it covers the full viewport width
+          height: "100vh", // Ensure it covers the full viewport height
               }}
             ></div>
-      <h2 className="text-5xl font-extrabold mb-12 text-green-600 text-center tracking-wide uppercase">
+      <h2 className="text-5xl font-extrabold mb-12 text-yellow-400 text-center tracking-wide uppercase">
         PHẦN TRẮC NGHIỆM
       </h2>
 
@@ -98,7 +103,7 @@ export default function MCQSection() {
               disabled={submitted[idx]}
               onClick={() => handleSelect(idx)}
               className={`w-32 h-32 rounded-full text-5xl font-extrabold flex items-center justify-center
-                ${submitted[idx] ? "bg-gray-300 text-gray-500" : "bg-blue-400 text-white hover:bg-blue-500"}
+                ${submitted[idx] ? "bg-gray-300 text-gray-500" : "bg-yellow-400 text-white hover:bg-blue-500"}
                 focus:outline-none transition`}
               style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.08)" }}
             >

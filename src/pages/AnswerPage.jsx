@@ -27,7 +27,6 @@ export default function AnswerPage() {
   const handleClose = () => {
     // Chỉ đóng được nếu tab này được mở bằng window.open từ hành động click
     window.close();
-
     // Fallback nếu trình duyệt không cho đóng (mở trực tiếp/refresh)
     setTimeout(() => {
       if (!document.hidden) {

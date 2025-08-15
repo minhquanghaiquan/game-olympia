@@ -3,7 +3,7 @@ import data from "../data/vuotChuongNgaiVatData";
 import { FaCheckCircle } from "react-icons/fa";
 import bellMp3 from "../assets/het_gio.m4a";
 import countingMp3 from "../assets/counting.mp3";
-import banner2 from "../assets/banner2.jpg";
+import banner2 from "../assets/hinhnen8.jpg";
 
 // Giữ function reveal như cũ
 function getKeywordReveal(statuses, clues, keyword, keywordCol) {
@@ -192,7 +192,7 @@ export default function VuotChuongNgaiVat() {
       className="relative min-h-screen flex flex-col items-center py-10 bg-cover bg-center"
       style={{ backgroundImage: `url(${banner2})` }}
     >
-      {/* Overlay riêng – chỉnh độ mờ tại đây */}
+
       <div className="absolute inset-0 bg-black opacity-75"></div>
 
       {/* Toàn bộ nội dung */}
@@ -204,7 +204,7 @@ export default function VuotChuongNgaiVat() {
 
         {/* Tiêu đề */}
         <h2 className="text-3xl font-extrabold text-white mb-6 tracking-wide drop-shadow-md">
-          Vượt Chướng Ngại Vật Olympia
+          GIẢI Ô CHỮ
         </h2>
 
         {/* Ô chữ TỪ KHOÁ ở đầu trang */}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import essayQuestions from "../data/essayQuestions";
+import essayQuestions from "../data/minigameQuestions";
 import bellMp3 from "../assets/het_gio.m4a"; // Âm báo khi hết giờ
-import bannerImage from '../assets/hinhnen6.jpg';
+import bannerImage from '../assets/hinhnen5.jpg';
 import countingMp3 from "../assets/counting.mp3"; // Âm báo đếm giờ (bạn nhớ thêm file này)
 
 export default function EssaySection() {
@@ -18,25 +18,6 @@ export default function EssaySection() {
   // Chia hàng nút số thành 5 hàng mỗi hàng 6 câu hỏi
   const rows = [...Array(5)].map((_, ridx) => essayQuestions.slice(ridx * 6, ridx * 6 + 6));
 
-  // Đếm giờ và audio
-  useEffect(() => {
-    if ((isCounting || isSupplement) && timeLeft > 0) {
-      if (countingAudioRef.current) {
-        countingAudioRef.current.loop = true;
-        countingAudioRef.current.play().catch(() => {});
-      }
-      timerRef.current = setTimeout(() => setTimeLeft((t) => t - 1), 1000);
-    } else {
-      if (countingAudioRef.current) {
-        countingAudioRef.current.pause();
-        countingAudioRef.current.currentTime = 0;
-      }
-      if ((isCounting || isSupplement) && timeLeft === 0) {
-        if (bellAudioRef.current) bellAudioRef.current.play();
-      }
-    }
-    return () => clearTimeout(timerRef.current);
-  }, [isCounting, isSupplement, timeLeft]);
 
   const handleSelect = (idx) => {
     if (!answered[idx]) {
@@ -46,18 +27,6 @@ export default function EssaySection() {
       setShowAnswer(false);
       setTimeLeft(40);
     }
-  };
-
-  const handleStart = () => {
-    setIsCounting(true);
-    setIsSupplement(false);
-    setTimeLeft(40);
-  };
-
-  const handleSupplement = () => {
-    setIsCounting(false);
-    setIsSupplement(true);
-    setTimeLeft(30);
   };
 
   const handleClose = () => {
@@ -78,12 +47,12 @@ export default function EssaySection() {
     }
   };
 
-    const handleShowAnswer = () => {
+  const handleShowAnswer = () => {
     setShowAnswer(true); // Show the answer when clicked
   };
 
 
- 
+
   return (
     <div className="my-8 p-4 rounded-xl shadow relative overflow-hidden">
       {/* Background Image with Blur */}
@@ -103,7 +72,7 @@ export default function EssaySection() {
 
       {/* TIÊU ĐỀ */}
       <h2 className="text-5xl font-extrabold mb-12 text-yellow-400 text-center tracking-wide uppercase relative z-10">
-        PHẦN THI TỰ LUẬN BẮT BUỘC
+        MINIGAME CHO KHÁN GIẢ
       </h2>
 
       {/* Các hàng nút */}
@@ -150,29 +119,10 @@ export default function EssaySection() {
               {essayQuestions[selected].question}
             </h3>
 
-            {/* Đếm 40s */}
-            {!isCounting && !isSupplement && (
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-5 px-14 rounded text-3xl self-center"
-                onClick={handleStart}
-              >
-                Bắt đầu
-              </button>
-            )}
 
-            {isCounting && !isSupplement && (
-              <div className="flex flex-col items-center gap-6">
-                <div className="text-5xl text-red-600 font-bold">{timeLeft} giây</div>
-                {timeLeft === 0 && (
-                  <div className="flex gap-8 mt-6">
-                    <button
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded text-3xl"
-                      onClick={handleClose}
-                    >
-                      Kết thúc
-                    </button>
 
-                                {/* Đáp án */}
+
+            {/* Đáp án */}
             <button
               className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-4 px-10 rounded text-3xl"
               onClick={handleShowAnswer}
@@ -180,50 +130,11 @@ export default function EssaySection() {
               Đáp án
             </button>
 
-                    <button
-                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-4 px-10 rounded text-3xl"
-                      onClick={handleSupplement}
-                    >
-                      Bổ sung
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Đếm 30s bổ sung */}
-            {isSupplement && (
-              <div className="flex flex-col items-center gap-6">
-                <div className="text-5xl text-orange-600 font-bold">{timeLeft} giây bổ sung</div>
-                {timeLeft === 0 && (
-                  <div className="flex gap-8 mt-6">
-                  <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded text-3xl mt-6"
-                    onClick={handleClose}
-                  >
-                    Kết thúc
-                  </button>
-            <button
-              className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-4 px-10 rounded text-3xl mt-6"
-              onClick={handleShowAnswer}
-            >
-              Đáp án
-            </button>
-                  
-                  
-                  </div>
-                  
-                )}
-              </div>
-            )}
-
-                        {showAnswer && (
+            {showAnswer && (
               <div className="text-3xl font-medium mt-6">
                 <strong>Đáp án:</strong> {essayQuestions[selected].answer}
               </div>
             )}
-
-            <audio ref={bellAudioRef} src={bellMp3} preload="auto" />
           </div>
         </div>
       )}

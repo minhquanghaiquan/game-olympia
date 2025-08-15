@@ -1,0 +1,15 @@
+
+
+
+Phan trac Nghiem
+- Hien mot nut de bat dau 
+- Chinh lai kich thuc o chu
+- Thoi gian trac Nghiem la 15s
+- Het trac Nghiem hien dap an
+
+Phan gia o chu
+- Thoi gian 30s
+- Dung / Bo sung -> Dung / Sai
+- Giai tu khoa / bam 2 lan
+- Tu khoa len tren
+- Cau hoi to len

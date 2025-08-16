@@ -3,16 +3,16 @@ import React, { useEffect, useRef, useState } from "react";
 // === CONFIG ===
 const API_KEY = "AIzaSyBakiumLfaVFv1WeTYoj_cDwrBunXCFfKg";
 const SHEET_ID = "1L6NrEPe7xFn8ZLvO4kOz2PWAc3dta0Id4A5RlVaxRWw";
-const CORRECT_ANSWERS = { DA1: "A", DA2: "B", DA3: "C" };
+const CORRECT_ANSWERS = { DA1: "A", DA2: "B", DA3: "C", DA4: "C", DA5: "C" , DA6: "C", DA7: "C", DA8: "C", DA9: "C"  };
 const REFRESH_MS = 2000; // cập nhật mỗi 2s, mượt (không giật)
 
 function getSheetParamId() {
   const id = new URLSearchParams(window.location.search).get("id");
-  return id && ["1", "2", "3"].includes(id) ? `DA${id}` : "DA1";
+  return id && ["1", "2", "3", "4", "5", "6", "7","8", "9"].includes(id) ? `DA${id}` : "DA1";
 }
 function getRawId() {
   const id = new URLSearchParams(window.location.search).get("id");
-  return id && ["1", "2", "3"].includes(id) ? id : "1";
+  return id && ["1", "2", "3", "4", "5", "6", "7","8", "9"].includes(id) ? id : "1";
 }
 
 export default function AnswerPage() {

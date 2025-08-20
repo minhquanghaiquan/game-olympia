@@ -57,7 +57,9 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-white border-t py-3 text-center text-sm text-gray-600">
         © 2025 Trường Cao đẳng Kỹ thuật Hải quân - Hội thi Olympic các môn lý luận chính trị
-        <p> Design by: Đại uý Nguyễn Minh Quang - TTRĐ</p>
+        <p style={{ fontWeight: 'bold' }}>
+          Design by: Đại uý Nguyễn Minh Quang - TTRĐ
+        </p>
       </footer>
     </div>
   );

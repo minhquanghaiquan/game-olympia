@@ -12,15 +12,17 @@ export default function MCQSection() {
   const [submitted, setSubmitted] = useState(Array(mcqQuestions.length).fill(false));
   const [showCorrect, setShowCorrect] = useState(false);
   const [timeLeft, setTimeLeft] = useState(15);
+  const [hasStarted, setHasStarted] = useState(false); // ⬅️ thêm cờ bắt đầu
   const timerRef = useRef(null);
   const bellAudioRef = useRef(null);
   const countingAudioRef = useRef(null);
 
   useEffect(() => {
-    if (selected !== null && !submitted[selected] && timeLeft > 0) {
+    // Chỉ đếm khi đã bấm Bắt đầu
+    if (selected !== null && hasStarted && !submitted[selected] && timeLeft > 0) {
       if (countingAudioRef.current) {
         countingAudioRef.current.loop = true;
-        countingAudioRef.current.play().catch(() => {});
+        countingAudioRef.current.play().catch(() => { });
       }
       timerRef.current = setTimeout(() => setTimeLeft((t) => t - 1), 1000);
     } else {
@@ -28,23 +30,24 @@ export default function MCQSection() {
         countingAudioRef.current.pause();
         countingAudioRef.current.currentTime = 0;
       }
-      if (selected !== null && timeLeft === 0 && !submitted[selected]) {
+      if (selected !== null && hasStarted && timeLeft === 0 && !submitted[selected]) {
         if (bellAudioRef.current) bellAudioRef.current.play();
         setShowCorrect(true);
         setSubmitted((prev) => prev.map((val, i) => (i === selected ? true : val)));
       }
     }
     return () => clearTimeout(timerRef.current);
-  }, [selected, timeLeft]);
+  }, [selected, hasStarted, timeLeft, submitted, showCorrect]); // ⬅️ thêm hasStarted & submitted & showCorrect
 
   const handleSelect = (idx) => {
     if (!submitted[idx]) {
       setSelected(idx);
       setTimeLeft(15);
       setShowCorrect(false);
+      setHasStarted(false); // ⬅️ khi mở modal, CHƯA chạy
       if (countingAudioRef.current) {
+        countingAudioRef.current.pause();
         countingAudioRef.current.currentTime = 0;
-        countingAudioRef.current.play().catch(() => {});
       }
     }
   };
@@ -56,6 +59,7 @@ export default function MCQSection() {
     setAnswers(next);
     setSubmitted((prev) => prev.map((val, i) => (i === idx ? true : val)));
     setShowCorrect(true);
+    setHasStarted(false); // ⬅️ dừng đếm khi đã trả lời
     if (countingAudioRef.current) {
       countingAudioRef.current.pause();
       countingAudioRef.current.currentTime = 0;
@@ -66,6 +70,7 @@ export default function MCQSection() {
     setSelected(null);
     setTimeLeft(15);
     setShowCorrect(false);
+    setHasStarted(false); // ⬅️ đảm bảo đóng modal thì dừng
     if (countingAudioRef.current) {
       countingAudioRef.current.pause();
       countingAudioRef.current.currentTime = 0;
@@ -78,19 +83,19 @@ export default function MCQSection() {
 
   return (
     <div className="my-8 p-4  rounded-2xl shadow-xl max-w-[1400px] mx-auto">
-       <div
-              className="absolute inset-0 bg-cover bg-center bg-blur-sm"
-              style={{
-          backgroundImage: `url(${bannerImage})`, // Replace with your image URL
-          filter: "blur(2px)", // Apply a subtle blur to the image
-          zIndex: -1, // Ensure the background stays behind other content
-          position: "fixed", // Make the background fixed and cover the entire screen
-          top: 0, // Position it at the top of the screen
-          left: 0, // Position it at the left of the screen
-          width: "100vw", // Ensure it covers the full viewport width
-          height: "100vh", // Ensure it covers the full viewport height
-              }}
-            ></div>
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-blur-sm"
+        style={{
+          backgroundImage: `url(${bannerImage})`,
+          filter: "blur(2px)",
+          zIndex: -1,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+        }}
+      ></div>
       <h2 className="text-5xl font-extrabold mb-12 text-yellow-400 text-center tracking-wide uppercase">
         PHẦN TRẮC NGHIỆM
       </h2>
@@ -129,6 +134,9 @@ export default function MCQSection() {
               {mcqQuestions[selected].question}
             </h3>
 
+            {/* KHU VỰC NÚT BẮT ĐẦU */}
+
+
             <div className="flex flex-col gap-4">
               {mcqQuestions[selected].options.map((opt, optIdx) => {
                 const label = optionLabels[optIdx];
@@ -153,8 +161,25 @@ export default function MCQSection() {
             </div>
 
             <div className="flex items-center justify-center mt-3">
-              {timeLeft > 0 && !showCorrect && (
+              {hasStarted && timeLeft > 0 && !showCorrect && (
                 <div className="text-3xl text-red-600 font-bold">{timeLeft} giây</div>
+              )}
+              {!showCorrect && timeLeft > 0 && !hasStarted && (
+                <div className="flex items-center justify-center">
+                  <button
+                    onClick={() => {
+                      setHasStarted(true);
+                      // bật âm thanh khi bắt đầu (tương thích policy autoplay)
+                      if (countingAudioRef.current) {
+                        countingAudioRef.current.currentTime = 0;
+                        countingAudioRef.current.play().catch(() => { });
+                      }
+                    }}
+                    className="px-6 py-3 rounded-xl bg-blue-600 text-white text-xl font-bold hover:bg-blue-700 transition"
+                  >
+                    Bắt đầu
+                  </button>
+                </div>
               )}
               {showCorrect && (
                 <div className="text-3xl text-green-700 font-extrabold ml-2">
@@ -164,7 +189,6 @@ export default function MCQSection() {
               )}
             </div>
 
-            {/* Nút dẫn đến bảng kết quả */}
             {showCorrect && (
               <a
                 href={`/answers?id=${mcqQuestions[selected].id}`}

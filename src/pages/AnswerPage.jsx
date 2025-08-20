@@ -3,16 +3,16 @@ import React, { useEffect, useRef, useState } from "react";
 // === CONFIG ===
 const API_KEY = "AIzaSyBakiumLfaVFv1WeTYoj_cDwrBunXCFfKg";
 const SHEET_ID = "1L6NrEPe7xFn8ZLvO4kOz2PWAc3dta0Id4A5RlVaxRWw";
-const CORRECT_ANSWERS = { DA1: "A", DA2: "B", DA3: "C", DA4: "C", DA5: "C" , DA6: "C", DA7: "C", DA8: "C", DA9: "C"  };
+const CORRECT_ANSWERS = { DA1: "A", DA2: "B", DA3: "C", DA4: "C", DA5: "C", DA6: "C", DA7: "C", DA8: "C", DA9: "C" };
 const REFRESH_MS = 2000; // cập nhật mỗi 2s, mượt (không giật)
 
 function getSheetParamId() {
   const id = new URLSearchParams(window.location.search).get("id");
-  return id && ["1", "2", "3", "4", "5", "6", "7","8", "9"].includes(id) ? `DA${id}` : "DA1";
+  return id && ["1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(id) ? `DA${id}` : "DA1";
 }
 function getRawId() {
   const id = new URLSearchParams(window.location.search).get("id");
-  return id && ["1", "2", "3", "4", "5", "6", "7","8", "9"].includes(id) ? id : "1";
+  return id && ["1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(id) ? id : "1";
 }
 
 export default function AnswerPage() {
@@ -48,8 +48,16 @@ export default function AnswerPage() {
 
       const res = await fetch(url, { cache: "no-store" });
       const result = await res.json();
-      const rows = result.values ? result.values.slice(1) : [];
-
+      var rows = result.values ? result.values.slice(1) : [];
+      rows = rows.map(r => {
+        r[3] = r[3].split(" ")[1];
+        return r;
+      });
+   
+      rows.sort((a, b) => {
+        return a[3].localeCompare(b[3]);
+      });
+    
       // Chỉ cập nhật khi dữ liệu thực sự thay đổi để tránh re-render nháy
       const prev = prevDataRef.current;
       const changed = JSON.stringify(prev) !== JSON.stringify(rows);

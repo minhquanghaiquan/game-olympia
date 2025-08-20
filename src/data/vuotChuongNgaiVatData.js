@@ -28,7 +28,7 @@ const clues = [
   },
   {
     clue: "Hàng ngang 7: Đây không chỉ là điểm du lịch tâm linh mà còn là một thắng cảnh nổi tiếng ở tỉnh Quảng Bình, đó là địa danh nào?",
-    answer: "VŨNGCHÙA–ĐẢO YẾN"
+    answer: "VŨNGCHÙAĐẢOYẾN"
   },
   {
     clue: "Hàng ngang 8: Những người có vai trò vô cùng quan trọng trong việc truyền đạt kiến thức?",

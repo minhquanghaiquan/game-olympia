@@ -158,7 +158,7 @@ export default function VuotChuongNgaiVat() {
   };
 
   const handleBonus = () => {
-    setTimeLeft(15);
+    setTimeLeft(30);
     setIsCounting(true);
     setShowJudge(false);
     setMode("bonus");
@@ -200,7 +200,7 @@ export default function VuotChuongNgaiVat() {
 
         {/* AUDIO */}
         <audio ref={audioBellRef} src={bellMp3} preload="auto" />
-        <audio ref={audioCountingRef} src={countingMp3} preload="auto" />
+        {/* <audio ref={audioCountingRef} src={countingMp3} preload="auto" /> */}
 
         {/* Tiêu đề */}
         <h2 className="text-3xl font-extrabold text-white mb-6 tracking-wide drop-shadow-md">
@@ -220,7 +220,7 @@ export default function VuotChuongNgaiVat() {
             ))}
           </div>
           <div className="text-center text-yellow-200 text-lg font-bold">
-            TỪ KHOÁ
+            TỪ KHOÁ CÓ 11 CHỮ CÁI
           </div>
           <button
             className="mt-3 w-fit px-4 py-2 bg-yellow-500 text-white rounded font-bold shadow hover:bg-yellow-600 transition"

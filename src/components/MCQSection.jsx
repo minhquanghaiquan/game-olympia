@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import mcqQuestions from "../data/mcqQuestions";
+import mcqQuestions from "../data/mcqQuestionsTest";
 import bellMp3 from "../assets/het_gio.m4a";
 import countingMp3 from "../assets/counting.mp3";
 import bannerImage from '../assets/hinhnen7.jpg';

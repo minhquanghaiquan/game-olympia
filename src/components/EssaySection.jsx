@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import essayQuestions from "../data/essayQuestions";
+import essayQuestions from "../data/essayQuestionsTest";
 import bellMp3 from "../assets/het_gio.m4a"; // Âm báo khi hết giờ
 import bannerImage from '../assets/hinhnen6.jpg';
 import countingMp3 from "../assets/counting.mp3"; // Âm báo đếm giờ (bạn nhớ thêm file này)

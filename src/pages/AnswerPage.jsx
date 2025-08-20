@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 // === CONFIG ===
 const API_KEY = "AIzaSyBakiumLfaVFv1WeTYoj_cDwrBunXCFfKg";
 const SHEET_ID = "1L6NrEPe7xFn8ZLvO4kOz2PWAc3dta0Id4A5RlVaxRWw";
-const CORRECT_ANSWERS = { DA1: "A", DA2: "B", DA3: "C", DA4: "C", DA5: "C", DA6: "C", DA7: "C", DA8: "C", DA9: "C" };
+const CORRECT_ANSWERS = { DA1: "B", DA2: "A", DA3: "D", DA4: "B", DA5: "A", DA6: "A", DA7: "C", DA8: "A", DA9: "C" };
 const REFRESH_MS = 2000; // cập nhật mỗi 2s, mượt (không giật)
 
 function getSheetParamId() {

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import data from "../data/vuotChuongNgaiVatData";
+import data from "../data/vuotChuongNgaiVatDataTest";
 import { FaCheckCircle } from "react-icons/fa";
 import bellMp3 from "../assets/het_gio.m4a";
 import countingMp3 from "../assets/counting.mp3";
@@ -193,7 +193,7 @@ export default function VuotChuongNgaiVat() {
       style={{ backgroundImage: `url(${banner2})` }}
     >
 
-      <div className="absolute inset-0 bg-black opacity-75"></div>
+      <div className="absolute inset-0 bg-black opacity-30"></div>
 
       {/* Toàn bộ nội dung */}
       <div className="relative z-10 w-full flex flex-col items-center">

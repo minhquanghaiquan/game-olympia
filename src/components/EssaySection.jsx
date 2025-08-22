@@ -1,26 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
 import essayQuestions from "../data/essayQuestionsTest";
-import bellMp3 from "../assets/het_gio.m4a"; // Âm báo khi hết giờ
+import bellMp3 from "../assets/het_gio.m4a";
 import bannerImage from '../assets/hinhnen6.jpg';
-import countingMp3 from "../assets/counting.mp3"; // Âm báo đếm giờ (bạn nhớ thêm file này)
+import countingMp3 from "../assets/dong_ho.mp3";
 
 export default function EssaySection() {
   const [answered, setAnswered] = useState(Array(essayQuestions.length).fill(false));
   const [selected, setSelected] = useState(null);
   const [isCounting, setIsCounting] = useState(false);
   const [isSupplement, setIsSupplement] = useState(false);
+  const [isStopped, setIsStopped] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   const [timeLeft, setTimeLeft] = useState(40);
   const timerRef = useRef(null);
   const bellAudioRef = useRef(null);
   const countingAudioRef = useRef(null);
 
-  // Chia hàng nút số thành 5 hàng mỗi hàng 6 câu hỏi
   const rows = [...Array(5)].map((_, ridx) => essayQuestions.slice(ridx * 6, ridx * 6 + 6));
 
-  // Đếm giờ và audio
   useEffect(() => {
-    if ((isCounting || isSupplement) && timeLeft > 0) {
+    if ((isCounting || isSupplement) && timeLeft > 0 && !isStopped) {
       if (countingAudioRef.current) {
         countingAudioRef.current.loop = true;
         countingAudioRef.current.play().catch(() => {});
@@ -31,18 +30,19 @@ export default function EssaySection() {
         countingAudioRef.current.pause();
         countingAudioRef.current.currentTime = 0;
       }
-      if ((isCounting || isSupplement) && timeLeft === 0) {
+      if ((isCounting || isSupplement) && timeLeft === 0 && !isStopped) {
         if (bellAudioRef.current) bellAudioRef.current.play();
       }
     }
     return () => clearTimeout(timerRef.current);
-  }, [isCounting, isSupplement, timeLeft]);
+  }, [isCounting, isSupplement, timeLeft, isStopped]);
 
   const handleSelect = (idx) => {
     if (!answered[idx]) {
       setSelected(idx);
       setIsCounting(false);
       setIsSupplement(false);
+      setIsStopped(false);
       setShowAnswer(false);
       setTimeLeft(40);
     }
@@ -51,19 +51,31 @@ export default function EssaySection() {
   const handleStart = () => {
     setIsCounting(true);
     setIsSupplement(false);
+    setIsStopped(false);
     setTimeLeft(40);
   };
 
   const handleSupplement = () => {
     setIsCounting(false);
     setIsSupplement(true);
+    setIsStopped(false);
     setTimeLeft(30);
+  };
+
+  const handleStop = () => {
+    setIsStopped(true);
+    if (countingAudioRef.current) {
+      countingAudioRef.current.pause();
+      countingAudioRef.current.currentTime = 0;
+    }
+    clearTimeout(timerRef.current);
   };
 
   const handleClose = () => {
     setSelected(null);
     setIsCounting(false);
     setIsSupplement(false);
+    setIsStopped(false);
     setTimeLeft(40);
     if (selected !== null) {
       setAnswered((prev) => prev.map((val, i) => (i === selected ? true : val)));
@@ -78,26 +90,24 @@ export default function EssaySection() {
     }
   };
 
-    const handleShowAnswer = () => {
-    setShowAnswer(true); // Show the answer when clicked
+  const handleShowAnswer = () => {
+    setShowAnswer(true);
   };
 
-
- 
   return (
     <div className="my-8 p-4 rounded-xl shadow relative overflow-hidden">
       {/* Background Image with Blur */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-blur-sm"
         style={{
-          backgroundImage: `url(${bannerImage})`, // Replace with your image URL
-          filter: "blur(2px)", // Apply a subtle blur to the image
-          zIndex: -1, // Ensure the background stays behind other content
-          position: "fixed", // Make the background fixed and cover the entire screen
-          top: 0, // Position it at the top of the screen
-          left: 0, // Position it at the left of the screen
-          width: "100vw", // Ensure it covers the full viewport width
-          height: "100vh", // Ensure it covers the full viewport height
+          backgroundImage: `url(${bannerImage})`,
+          filter: "blur(2px)",
+          zIndex: -1,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
         }}
       ></div>
 
@@ -151,7 +161,7 @@ export default function EssaySection() {
             </h3>
 
             {/* Đếm 40s */}
-            {!isCounting && !isSupplement && (
+            {!isCounting && !isSupplement && !isStopped && (
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-5 px-14 rounded text-3xl self-center"
                 onClick={handleStart}
@@ -160,70 +170,66 @@ export default function EssaySection() {
               </button>
             )}
 
-            {isCounting && !isSupplement && (
+            {/* Hiển thị đếm giờ và nút Dừng chỉ khi chưa hết giờ và chưa dừng */}
+            {(isCounting || isSupplement) && timeLeft > 0 && !isStopped && (
               <div className="flex flex-col items-center gap-6">
-                <div className="text-5xl text-red-600 font-bold">{timeLeft} giây</div>
-                {timeLeft === 0 && (
-                  <div className="flex gap-8 mt-6">
-                    <button
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded text-3xl"
-                      onClick={handleClose}
-                    >
-                      Kết thúc
-                    </button>
+                <div className="text-5xl text-red-600 font-bold">
+                  {timeLeft} giây{isSupplement ? ' bổ sung' : ''}
+                </div>
+                <button
+                  className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-4 px-10 rounded text-3xl mt-4"
+                  onClick={handleStop}
+                >
+                  Dừng
+                </button>
+              </div>
+            )}
 
-                                {/* Đáp án */}
-            <button
-              className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-4 px-10 rounded text-3xl"
-              onClick={handleShowAnswer}
-            >
-              Đáp án
-            </button>
+            {/* Hiển thị nút sau khi dừng hoặc hết giờ */}
+            {(isStopped || timeLeft === 0) && (
+              <div className="flex flex-col items-center gap-6">
+                {timeLeft === 0 && !isStopped && (
+                  <div className="text-5xl text-red-600 font-bold">Hết giờ!</div>
+                )}
+                {isStopped && (
+                  <div className="text-5xl text-blue-600 font-bold">Đã dừng!</div>
+                )}
+                
+                <div className="flex gap-8 mt-6">
+                  <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded text-3xl"
+                    onClick={handleClose}
+                  >
+                    Kết thúc
+                  </button>
 
+                  <button
+                    className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-4 px-10 rounded text-3xl"
+                    onClick={handleShowAnswer}
+                  >
+                    Đáp án
+                  </button>
+
+                  {isCounting && !isSupplement && (
                     <button
                       className="bg-green-500 hover:bg-green-700 text-white font-bold py-4 px-10 rounded text-3xl"
                       onClick={handleSupplement}
                     >
                       Bổ sung
                     </button>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             )}
 
-            {/* Đếm 30s bổ sung */}
-            {isSupplement && (
-              <div className="flex flex-col items-center gap-6">
-                <div className="text-5xl text-orange-600 font-bold">{timeLeft} giây bổ sung</div>
-                {timeLeft === 0 && (
-                  <div className="flex gap-8 mt-6">
-                  <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded text-3xl mt-6"
-                    onClick={handleClose}
-                  >
-                    Kết thúc
-                  </button>
-            <button
-              className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-4 px-10 rounded text-3xl mt-6"
-              onClick={handleShowAnswer}
-            >
-              Đáp án
-            </button>
-                  
-                  
-                  </div>
-                  
-                )}
-              </div>
-            )}
-
-                        {showAnswer && (
+            {showAnswer && (
               <div className="text-3xl font-medium mt-6">
                 <strong>Đáp án:</strong> {essayQuestions[selected].answer}
               </div>
             )}
 
             <audio ref={bellAudioRef} src={bellMp3} preload="auto" />
+            <audio ref={countingAudioRef} src={countingMp3} preload="auto" />
           </div>
         </div>
       )}

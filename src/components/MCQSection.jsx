@@ -146,10 +146,8 @@ export default function MCQSection() {
                     key={optIdx}
                     disabled={submitted[selected] || showCorrect}
                     onClick={() => handleAnswer(selected, optIdx)}
-                    className={`flex items-center gap-4 px-6 py-5 rounded-xl text-2xl border font-semibold text-left transition
-                      ${isCorrect ? "border-green-500 bg-green-100 text-green-700 font-bold animate-pulse" : "bg-gray-50 border-gray-300"}
-                      ${submitted[selected] && answers[selected] === optIdx && !isCorrect ? "opacity-70 line-through" : ""}
-                      ${!showCorrect && !submitted[selected] ? "hover:bg-blue-50" : ""}`}
+                    className={`flex items-center gap-4 px-6 py-5 rounded-xl text-2xl border font-semibold text-left transition bg-gray-50 border-gray-300
+                      `}
                   >
                     <span className="w-10 h-10 flex items-center justify-center bg-blue-200 rounded-full text-blue-700 font-bold text-2xl">
                       {label}
@@ -181,12 +179,12 @@ export default function MCQSection() {
                   </button>
                 </div>
               )}
-              {showCorrect && (
+              {/* {showCorrect && (
                 <div className="text-3xl text-green-700 font-extrabold ml-2">
                   Đáp án đúng:{" "}
                   <span className="underline">{optionLabels[mcqQuestions[selected].answer]}</span>
                 </div>
-              )}
+              )} */}
             </div>
 
             {showCorrect && (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import mcqQuestions from "../data/mcqQuestionsTest";
+import mcqQuestions from "../data/mcqQuestions";
 import bellMp3 from "../assets/het_gio.m4a";
 import countingMp3 from "../assets/counting.mp3";
 import bannerImage from '../assets/hinhnen7.jpg';
@@ -97,7 +97,7 @@ export default function MCQSection() {
         }}
       ></div>
       <h2 className="text-5xl font-extrabold mb-12 text-yellow-400 text-center tracking-wide uppercase">
-        PHẦN TRẮC NGHIỆM
+        PHẦN THI: TRẮC NGHIỆM
       </h2>
 
       <div className="w-full flex justify-center mb-8">

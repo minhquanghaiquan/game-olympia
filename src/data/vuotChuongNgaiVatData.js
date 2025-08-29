@@ -1,42 +1,42 @@
-const keyword = "CHIẾN THẮNG";
-const keywordCol = 1;
+const keyword = "KỶNGUYÊNVƯƠNMÌNH"; // ví dụ từ khóa chính
+const keywordCol = 3; // ví dụ cột đặt từ khóa, bạn có thể đổi lại tùy sơ đồ ô chữ
 
 const clues = [
   {
-    clue: "Hàng ngang 1: Siêu bão Haiyan ở Philippines xảy ra vào năm nào?",
-    answer: "2013"
+    clue: "Hàng ngang 1: Đây là nguồn lực đặc biệt, quý giá nhất của quốc gia, quyết định sức mạnh nội sinh và năng lực cạnh tranh trên trường quốc tế.",
+    answer: "NHÂNTÀI"
   },
   {
-    clue: "Hàng ngang 2: Đây là môn khoa học nghiên cứu về quá khứ, đặc biệt là những sự kiện liên quan đến con người, đó là môn khoa học gì?",
-    answer: "LỊCHSỬ"
+    clue: "Hàng ngang 2: Đây là một sự kiện lịch sử vĩ đại của dân tộc Việt Nam, là một dấu mốc quan trọng, mở ra kỷ nguyên độc lập, tự do cho dân tộc Việt Nam và để lại nhiều giá trị và bài học quý giá cho các thế hệ sau.",
+    answer: "CÁCHMẠNGTHÁNGTÁM"
   },
   {
-    clue: "Hàng ngang 3: Tỉnh duy nhất của Việt Nam có chung đường biên giới với Lào và Trung Quốc, đó là tỉnh nào?",
-    answer: "ĐIỆNBIÊN"
+    clue: "Hàng ngang 3: Đây là một sự kiện chính trị trọng đại sắp diễn ra, nơi Đảng ta đề ra đường lối, chiến lược đưa đất nước bước vào giai đoạn phát triển mới.",
+    answer: "ĐẠIHỘIXIV"
   },
   {
-    clue: "Hàng ngang 4: Để đánh lạc hướng bọn mật thám, khi hoạt động tại Trung Quốc, từ tháng 6/1942 Nguyễn Ái Quốc lấy tên mới là gì?",
-    answer: "HỒCHÍMINH"
+    clue: "Hàng ngang 4: Đây là một chiến tuyến vô hình trên không gian số, là mặt trận quan trọng để bảo vệ chủ quyền số quốc gia trong thời đại toàn cầu hóa thông tin.",
+    answer: "ANNINHMẠNG"
   },
   {
-    clue: "Hàng ngang 5: Đây là một thành phần trong lực lượng vũ trang nhân dân Việt Nam?",
-    answer: "QUÂNĐỘI"
+    clue: "Hàng ngang 5: Đây là năm được Đảng ta xác định mục tiêu phấn đấu đưa Việt Nam trở thành quốc gia phát triển, thu nhập cao.",
+    answer: "2045"
   },
   {
-    clue: "Hàng ngang 6: Người đứng đầu trong cơ quan, đơn vị, điều khiển hoạt động của một lực lượng, một tập thể có tổ chức cùng làm một nhiệm vụ; được sử dụng quyền lực nhà nước để ra những mệnh lệnh có tính chất bắt buộc đối với những người dưới quyền, được gọi là gì?",
-    answer: "CHỈHUY"
+    clue: "Hàng ngang 6: Đây là ý chí không khuất phục, tự lực vươn lên, không để phụ thuộc hay bị chi phối bởi ngoại lực; là sức mạnh nội tại của một dân tộc.",
+    answer: "TỰCƯỜNG"
   },
   {
-    clue: "Hàng ngang 7: Đây không chỉ là điểm du lịch tâm linh mà còn là một thắng cảnh nổi tiếng ở tỉnh Quảng Bình, đó là địa danh nào?",
-    answer: "VŨNGCHÙAĐẢOYẾN"
+    clue: "Hàng ngang 7: Đây là quá trình ứng dụng công nghệ số vào mọi lĩnh vực của đời sống, kinh tế – xã hội, nhằm thay đổi phương thức làm việc, nâng cao năng suất và chất lượng dịch vụ.",
+    answer: "CHUYỂNĐỔISỐ"
   },
   {
-    clue: "Hàng ngang 8: Những người có vai trò vô cùng quan trọng trong việc truyền đạt kiến thức?",
-    answer: "GIÁOVIÊN"
+    clue: "Hàng ngang 8: Đây là công nghệ mang tính đột phá, đang thay đổi phương thức sản xuất, quản lý và đời sống con người; được ứng dụng rộng rãi trong mọi lĩnh vực của đời sống xã hội.",
+    answer: "TRÍTUỆNHÂNTẠO"
   },
   {
-    clue: "Hàng ngang 9: Bậc quân hàm cao nhất của Quân đội Nhân dân Việt Nam?",
-    answer: "ĐẠITƯỚNG"
+    clue: "Hàng ngang 9: Đây là Quyền tối cao của quốc gia đối với lãnh thổ, vùng biển, bầu trời - giá trị thiêng liêng được bảo vệ bằng máu xương và trí tuệ bao thế hệ.",
+    answer: "CHỦQUYỀN"
   },
 ];
 

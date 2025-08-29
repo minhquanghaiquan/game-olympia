@@ -3,8 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 // === CONFIG ===
 const API_KEY = "AIzaSyBakiumLfaVFv1WeTYoj_cDwrBunXCFfKg";
 const SHEET_ID = "1L6NrEPe7xFn8ZLvO4kOz2PWAc3dta0Id4A5RlVaxRWw";
-const CORRECT_ANSWERS = { DA1: "B", DA2: "A", DA3: "D", DA4: "B", DA5: "A", DA6: "A", DA7: "C", DA8: "A", DA9: "C" };
-const REFRESH_MS = 2000;
+const CORRECT_ANSWERS = { DA1: "A", DA2: "B", DA3: "A", DA4: "C", DA5: "B", DA6: "D", DA7: "D", DA8: "C", DA9: "D" };
+const REFRESH_MS = 1000;
 
 function getSheetParamId() {
   const id = new URLSearchParams(window.location.search).get("id");
@@ -56,11 +56,11 @@ export default function AnswerPage() {
         r[3] = r[3].split(" ")[1];
         return r;
       });
-   
+
       rows.sort((a, b) => {
         return a[3].localeCompare(b[3]);
       });
-    
+
       const prev = prevDataRef.current;
       const changed = JSON.stringify(prev) !== JSON.stringify(rows);
       if (changed) {
@@ -119,6 +119,18 @@ export default function AnswerPage() {
             >
               HIỂN THỊ ĐÁP ÁN
             </button>
+            <audio id="answerSound" src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3"></audio>
+          </div>
+        )}
+
+        {showAnswers && (
+          <div className="text-center mb-10">
+            <button
+              className="bg-pink-600 hover:bg-blue-800 text-white font-bold py-6 px-16 rounded text-4xl shadow-lg transition-all duration-300 transform hover:scale-105"
+              style={{ fontSize: '2.5rem' }}
+            >
+              ĐÁP ÁN ĐÚNG LÀ {correctAnswer}
+            </button>
           </div>
         )}
 
@@ -146,8 +158,8 @@ export default function AnswerPage() {
                   const key = `${time}|${group}|${answer}|${idx}`;
 
                   return (
-                    <tr 
-                      key={key} 
+                    <tr
+                      key={key}
                       className={showAnswers ? (isCorrect ? "bg-green-100" : "bg-red-100") : ""}
                       style={{ height: '100px' }}
                     >

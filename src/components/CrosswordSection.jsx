@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import data from "../data/vuotChuongNgaiVatDataTest";
+import data from "../data/vuotChuongNgaiVatData";
 import { FaCheckCircle } from "react-icons/fa";
 import bellMp3 from "../assets/het_gio.m4a";
 import countingMp3 from "../assets/dong_ho.mp3";
@@ -221,12 +221,12 @@ export default function VuotChuongNgaiVat() {
 
         {/* Tiêu đề - ĐIỀU CHỈNH KÍCH THƯỚC */}
         <h2 className="text-4xl font-extrabold text-white mb-6 tracking-wide drop-shadow-md">
-          GIẢI Ô CHỮ
+          PHẦN THI: GIẢI Ô CHỮ
         </h2>
 
         {/* Ô chữ TỪ KHOÁ ở đầu trang - ĐIỀU CHỈNH KÍCH THƯỚC */}
         <div className="flex flex-col items-center mb-8">
-          <div className="flex gap-2 mb-3 justify-center flex-wrap max-w-4xl mx-auto">
+          <div className="flex gap-2 mb-3 justify-center flex-wrap max-w-5xl mx-auto">
             {keywordArr.map((ch, idx) => (
               <div
                 key={idx}
@@ -237,7 +237,7 @@ export default function VuotChuongNgaiVat() {
             ))}
           </div>
           <div className="text-center text-yellow-200 text-xl font-bold mb-3">
-            TỪ KHOÁ CÓ 11 CHỮ CÁI
+            TỪ KHOÁ CÓ 16 CHỮ CÁI
           </div>
           <button
             className="px-5 py-2 bg-yellow-500 text-white rounded-lg font-bold text-lg shadow hover:bg-yellow-600 transition"
@@ -371,7 +371,7 @@ export default function VuotChuongNgaiVat() {
                 return (
                   <div className="mt-4 flex flex-col items-center">
                     <div className="text-2xl font-extrabold text-slate-800">
-                      Hàng ngang có {ansLen} từ khoá
+                      Hàng ngang có {ansLen} chữ cái
                     </div>
                     <div className="mt-3 flex gap-2">
                       {Array.from({ length: ansLen }).map((_, i) => (

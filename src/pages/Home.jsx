@@ -10,11 +10,14 @@ export default function Home() {
         <img src={schoolLogo} alt="School Logo" className="w-16 h-16 rounded-full" />
         <div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-blue-900">
-            Hội Thi Olympic 2025
+            Hội thi Olympic các môn khoa học Mác - Lênin,
           </h1>
-          <p className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-wide italic">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-blue-900">
+            tư tưởng Hồ Chí Minh và nhận thức chính trị - xã hội năm 2025
+          </h1>
+          {/* <p className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-wide italic">
             Các môn khoa học Mác - Lênin, tư tưởng Hồ Chí Minh & Nhận thức chính trị – xã hội
-          </p>
+          </p> */}
         </div>
       </header>
 
@@ -32,7 +35,8 @@ export default function Home() {
         <div className="flex flex-col sm:flex-row gap-6">
           <Link to="/essay">
             <button className="w-60 sm:w-72 h-24 sm:h-28 bg-yellow-400 hover:bg-yellow-500 text-2xl sm:text-3xl font-bold rounded-xl shadow-xl transition">
-              Tự luận
+              Trả lời câu hỏi<br />
+              tự luận bắt buộc
             </button>
           </Link>
           <Link to="/mcq">
@@ -46,9 +50,10 @@ export default function Home() {
             </button>
           </Link>
 
-          <Link to="/minigame">
+          <Link to="">
             <button className="w-60 sm:w-72 h-24 sm:h-28 bg-green-400 hover:bg-red-500 text-2xl sm:text-3xl font-bold rounded-xl shadow-xl transition">
-              MiniGame
+              Hùng biện <br />
+              theo chủ đề
             </button>
           </Link>
         </div>
@@ -56,7 +61,9 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-white border-t py-3 text-center text-sm text-gray-600">
-        © 2025 Trường Cao đẳng Kỹ thuật Hải quân - Hội thi Olympic các môn lý luận chính trị
+        <p style={{ fontWeight: 'bold' }}>
+          © 2025 Trường Cao đẳng Kỹ thuật Hải quân
+        </p>
         <p style={{ fontWeight: 'bold' }}>
           Design by: Đại uý Nguyễn Minh Quang - TTRĐ
         </p>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import essayQuestions from "../data/essayQuestionsTest";
+import essayQuestions from "../data/essayQuestions";
 import bellMp3 from "../assets/het_gio.m4a";
 import bannerImage from '../assets/hinhnen6.jpg';
 import countingMp3 from "../assets/dong_ho.mp3";
@@ -113,7 +113,7 @@ export default function EssaySection() {
 
       {/* TIÊU ĐỀ */}
       <h2 className="text-5xl font-extrabold mb-12 text-yellow-400 text-center tracking-wide uppercase relative z-10">
-        PHẦN THI TỰ LUẬN BẮT BUỘC
+        PHẦN THI: TRẢ LỜI CÂU HỎI TỰ LUẬN BẮT BUỘC
       </h2>
 
       {/* Các hàng nút */}
